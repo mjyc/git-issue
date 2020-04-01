@@ -302,8 +302,6 @@ create_issue()
     jstring=$(printf '%s' "$jstring" | jq --arg desc "${description%x}" --arg tit "$title" \
       -r '. + {title: $tit, body: $desc}')
   else
-    # add trailing spaces if needed, or gitlab will ignore the newline
-    description=$(echo "$description" | sed '$!s/[^ ] \?$/&  /')
     # TODO: this directive is not needed on latest shellcheck versions
     # shellcheck disable=SC2016
     jstring=$(printf '%s' "$jstring" | jq --arg desc "${description%x}" --arg tit "$title" \
